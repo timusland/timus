@@ -1,0 +1,17 @@
+{
+    "name": "@timus/parser",
+    "version": "0.1.0",
+    "main": "index.js",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/timusland/timus.git"
+    },
+    "keywords": [
+        "timus"
+    ],
+    "author": "Conrado Carvalho",
+    "bugs": {
+        "url": "https://github.com/timusland/timus/issues"
+    }
+}
