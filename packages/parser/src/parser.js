@@ -10,7 +10,7 @@ function getRegExpWords(regex) {
         .map(w => w.trim())
 }
 
-function getLanguageWordsRegExp(jsWordsRegExp, lang) {
+export function getLanguageWordsRegExp(jsWordsRegExp, lang) {
     if (!lang)
         return jsWordsRegExp
 
