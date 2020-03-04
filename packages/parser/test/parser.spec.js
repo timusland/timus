@@ -33,6 +33,12 @@ describe('getLanguageWordsRegExp', () => {
         const result = getLanguageWordsRegExp(regex, lang)
         assert.equal(result.source, '^(?:fn|f|rtn|if|else|for)$')
     })
+
+    it('should return the original regex if lang is `undefined`', () => {
+        const regex = new RegExp('^(?:function|return|if|else|for)$')
+        const result = getLanguageWordsRegExp(regex)
+        assert.equal(result.source, regex.source)
+    })
 })
 
 describe('getLanguageSynonyms', () => {
