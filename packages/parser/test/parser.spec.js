@@ -182,3 +182,15 @@ describe('areSynonyms', () => {
         assert.equal(result, false)
     })
 })
+
+describe('TimusParser', () => {
+    const acornTests = require('./acorn-tests/index')
+    const languages = require('./languages/index')
+
+    describe('parse', () => {
+        acornTests.run()
+        // check each language case
+        for (lang of languages)
+            acornTests.run(lang)
+    })
+})
