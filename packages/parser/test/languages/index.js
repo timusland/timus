@@ -25,6 +25,7 @@ module.exports = [
         'in': 'em',
         'instanceof': 'instânciade',
         'interface': 'intf',
+        'let': 'seja',
         'new': 'novo',
         'null': 'anulado',
         'package': 'pack',

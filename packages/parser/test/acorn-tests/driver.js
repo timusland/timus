@@ -144,6 +144,8 @@ function getTestWords(lang) {
         _instanceof: getLanguageSynonym('instanceof', lang),
         _interface: getLanguageSynonym('interface', lang),
 
+        _let: getLanguageSynonym('let', lang),
+
         _new: getLanguageSynonym('new', lang),
         _null: getLanguageSynonym('null', lang),
 
