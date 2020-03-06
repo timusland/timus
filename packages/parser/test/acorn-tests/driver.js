@@ -22,6 +22,10 @@ function isObject(value) {
         && Array.isArray(value) === false
 }
 
+function isEmptyObject(object) {
+    return Object.keys(object).length === 0
+}
+
 // The expected AST is an ordinary object. The real AST is
 // a Node instance. In order to compare them, we need to set all
 // objects to ordinary objects, otherwise we will get a deepStrictEqual
@@ -31,6 +35,9 @@ function mapAstToTest(ast, { locations }) {
         delete ast.start
         delete ast.end
     }
+
+    if (!ast.sourceType)
+        ast.sourceType = 'script'
 
     walkObject(ast, (key, prop, object) => {
         if (!isObject(prop))
@@ -66,8 +73,13 @@ function getTestRunner(language) {
                 ecmaVersion: 5,
                 ...options
             }
-            expectedAst.sourceType = options.sourceType || 'script'
+
             let ast = TimusParser.parse(code, options)
+
+            // just checking if it parses without errors
+            if (isEmptyObject(expectedAst))
+                return
+
             ast = mapAstToTest(ast, options)
             expectedAst = mapAstToTest(expectedAst, options)
             assert.deepStrictEqual(ast, expectedAst, code)
@@ -104,9 +116,14 @@ function getTestWords(lang) {
         _arguments: getLanguageSynonym('arguments', lang),
         _await: getLanguageSynonym('await', lang),
 
+        _break: getLanguageSynonym('break', lang),
+
         _case: getLanguageSynonym('case', lang),
+        _catch: getLanguageSynonym('catch', lang),
         _continue: getLanguageSynonym('continue', lang),
 
+        _debugger: getLanguageSynonym('debugger', lang),
+        _default: getLanguageSynonym('default', lang),
         _delete: getLanguageSynonym('delete', lang),
         _do: getLanguageSynonym('do', lang),
 
@@ -114,6 +131,7 @@ function getTestWords(lang) {
         _eval: getLanguageSynonym('eval', lang),
 
         _false: getLanguageSynonym('false', lang),
+        _finally: getLanguageSynonym('finally', lang),
         _for: getLanguageSynonym('for', lang),
         _function: getLanguageSynonym('function', lang),
 
@@ -141,13 +159,16 @@ function getTestWords(lang) {
         _switch: getLanguageSynonym('switch', lang),
 
         _this: getLanguageSynonym('this', lang),
+        _throw: getLanguageSynonym('throw', lang),
         _true: getLanguageSynonym('true', lang),
+        _try: getLanguageSynonym('try', lang),
         _typeof: getLanguageSynonym('typeof', lang),
 
         _var: getLanguageSynonym('var', lang),
         _void: getLanguageSynonym('void', lang),
 
-        _while: getLanguageSynonym('while', lang)
+        _while: getLanguageSynonym('while', lang),
+        _with: getLanguageSynonym('with', lang)
     }
 }
 

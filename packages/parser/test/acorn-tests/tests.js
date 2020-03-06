@@ -15,13 +15,18 @@ function run(lang) {
         _Object,
         _arguments,
         _await,
+        _break,
         _case,
+        _catch,
         _continue,
+        _debugger,
+        _default,
         _delete,
         _do,
         _else,
         _eval,
         _false,
+        _finally,
         _for,
         _function,
         _get,
@@ -42,11 +47,14 @@ function run(lang) {
         _static,
         _switch,
         _this,
+        _throw,
         _true,
+        _try,
         _typeof,
         _var,
         _void,
         _while,
+        _with
     } = testWords
 
     // To make it easier dealing with positions we also
@@ -54,13 +62,18 @@ function run(lang) {
     const objectDiff = _Object.length - 'Object'.length
     const argumentsDiff = _arguments.length - 'arguments'.length
     const awaitDiff = _await.length - 'await'.length
+    const breakDiff = _break.length - 'break'.length
     const caseDiff = _case.length - 'case'.length
+    const catchDiff = _catch.length - 'catch'.length
     const continueDiff = _continue.length - 'continue'.length
+    const debuggerDiff = _debugger.length - 'debugger'.length
+    const defaultDiff = _default.length - 'default'.length
     const deleteDiff = _delete.length - 'delete'.length
     const doDiff = _do.length - 'do'.length
     const elseDiff = _else.length - 'else'.length
     const evalDiff = _eval.length - 'eval'.length
     const falseDiff = _false.length - 'false'.length
+    const finallyDiff = _finally.length - 'finally'.length
     const forDiff = _for.length - 'for'.length
     const functionDiff = _function.length - 'function'.length
     const getDiff = _get.length - 'get'.length
@@ -81,11 +94,14 @@ function run(lang) {
     const staticDiff = _static.length - 'static'.length
     const switchDiff = _switch.length - 'switch'.length
     const thisDiff = _this.length - 'this'.length
+    const throwDiff = _throw.length - 'throw'.length
     const trueDiff = _true.length - 'true'.length
+    const tryDiff = _try.length - 'try'.length
     const typeofDiff = _typeof.length - 'typeof'.length
     const varDiff = _var.length - 'var'.length
     const voidDiff = _void.length - 'void'.length
     const whileDiff = _while.length - 'while'.length
+    const withDiff = _with.length - 'with'.length
 
     test(`${_import} ''`, {
         sourceType: 'module',
@@ -20919,6 +20935,2885 @@ function run(lang) {
             end: {
                 line: 1,
                 column: 37 + whileDiff + trueDiff + continueDiff
+            }
+        }
+    })
+
+    test(`${_while} (${_true}) { ${_break} }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'WhileStatement',
+                test: {
+                    type: 'Literal',
+                    raw: _true,
+                    value: true,
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 7 + whileDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 11 + whileDiff + trueDiff
+                        }
+                    }
+                },
+                body: {
+                    type: 'BlockStatement',
+                    body: [
+                        {
+                            type: 'BreakStatement',
+                            label: null,
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 15 + whileDiff + trueDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 20 + whileDiff + trueDiff + breakDiff
+                                }
+                            }
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 13 + whileDiff + trueDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 22 + whileDiff + trueDiff + breakDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 22 + whileDiff + trueDiff + breakDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 22 + whileDiff + trueDiff + breakDiff
+            }
+        }
+    })
+
+    test(`done: ${_while} (${_true}) { ${_break} done }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'LabeledStatement',
+                body: {
+                    type: 'WhileStatement',
+                    test: {
+                        type: 'Literal',
+                        raw: _true,
+                        value: true,
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 13 + whileDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 17 + whileDiff + trueDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'BreakStatement',
+                                label: {
+                                    type: 'Identifier',
+                                    name: 'done',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 27 + whileDiff + trueDiff + breakDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 31 + whileDiff + trueDiff + breakDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 21 + whileDiff + trueDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 31 + whileDiff + trueDiff + breakDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 19 + whileDiff + trueDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 33 + whileDiff + trueDiff + breakDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6
+                        },
+                        end: {
+                            line: 1,
+                            column: 33 + whileDiff + trueDiff + breakDiff
+                        }
+                    }
+                },
+                label: {
+                    type: 'Identifier',
+                    name: 'done',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 0
+                        },
+                        end: {
+                            line: 1,
+                            column: 4
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 33 + whileDiff + trueDiff + breakDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 33 + whileDiff + trueDiff + breakDiff
+            }
+        }
+    })
+
+    test(`done: ${_while} (${_true}) { ${_break} done; }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'LabeledStatement',
+                body: {
+                    type: 'WhileStatement',
+                    test: {
+                        type: 'Literal',
+                        raw: _true,
+                        value: true,
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 13 + whileDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 17 + whileDiff + trueDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'BreakStatement',
+                                label: {
+                                    type: 'Identifier',
+                                    name: 'done',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 27 + whileDiff + trueDiff + breakDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 31 + whileDiff + trueDiff + breakDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 21 + whileDiff + trueDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 32 + whileDiff + trueDiff + breakDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 19 + whileDiff + trueDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 34 + whileDiff + trueDiff + breakDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6
+                        },
+                        end: {
+                            line: 1,
+                            column: 34 + whileDiff + trueDiff + breakDiff
+                        }
+                    }
+                },
+                label: {
+                    type: 'Identifier',
+                    name: 'done',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 0
+                        },
+                        end: {
+                            line: 1,
+                            column: 4
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 34 + whileDiff + trueDiff + breakDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 34 + whileDiff + trueDiff + breakDiff
+            }
+        }
+    })
+
+    test(`done: ${_switch} (a) { ${_default}: ${_break} done }`, {
+        type: 'Program',
+        start: 0,
+        end: 40 + switchDiff + defaultDiff + breakDiff,
+        body: [
+            {
+                type: 'LabeledStatement',
+                start: 0,
+                end: 40 + switchDiff + defaultDiff + breakDiff,
+                body: {
+                    type: 'SwitchStatement',
+                    start: 6,
+                    end: 40 + switchDiff + defaultDiff + breakDiff,
+                    discriminant: {
+                        type: 'Identifier',
+                        start: 14 + switchDiff,
+                        end: 15 + switchDiff,
+                        name: 'a'
+                    },
+                    cases: [
+                        {
+                            type: 'SwitchCase',
+                            start: 19 + switchDiff,
+                            end: 38 + switchDiff + defaultDiff + breakDiff,
+                            consequent: [
+                                {
+                                    type: 'BreakStatement',
+                                    start: 28 + switchDiff + defaultDiff,
+                                    end: 38 + switchDiff + defaultDiff + breakDiff,
+                                    label: {
+                                        type: 'Identifier',
+                                        start: 34 + switchDiff + defaultDiff + breakDiff,
+                                        end: 38 + switchDiff + defaultDiff + breakDiff,
+                                        name: 'done'
+                                    }
+                                }
+                            ],
+                            test: null
+                        }
+                    ]
+                },
+                label: {
+                    type: 'Identifier',
+                    start: 0,
+                    end: 4,
+                    name: 'done'
+                }
+            }
+        ]
+    }, { locations: false })
+
+    test(`target1: target2: ${_while} (${_true}) { ${_continue} target1; }`, {})
+    test(`target1: target2: target3: ${_while} (${_true}) { ${_continue} target1; }`, {})
+
+    test(`(${_function}(){ ${_return} })`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'ExpressionStatement',
+                expression: {
+                    expression: false,
+                    type: 'FunctionExpression',
+                    id: null,
+                    params: [],
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'ReturnStatement',
+                                argument: null,
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 13 + functionDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 19 + functionDiff + returnDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 11 + functionDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 21 + functionDiff + returnDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 1
+                        },
+                        end: {
+                            line: 1,
+                            column: 21 + functionDiff + returnDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 22 + functionDiff + returnDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 22 + functionDiff + returnDiff
+            }
+        }
+    })
+
+    test(`(${_function}(){ ${_return}; })`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'ExpressionStatement',
+                expression: {
+                    expression: false,
+                    type: 'FunctionExpression',
+                    id: null,
+                    params: [],
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'ReturnStatement',
+                                argument: null,
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 13 + functionDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 20 + functionDiff + returnDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 11 + functionDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 22 + functionDiff + returnDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 1
+                        },
+                        end: {
+                            line: 1,
+                            column: 22 + functionDiff + returnDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 23 + functionDiff + returnDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 23 + functionDiff + returnDiff
+            }
+        }
+    })
+
+    test(`(${_function}(){ ${_return} x; })`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'ExpressionStatement',
+                expression: {
+                    expression: false,
+                    type: 'FunctionExpression',
+                    id: null,
+                    params: [],
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'ReturnStatement',
+                                argument: {
+                                    type: 'Identifier',
+                                    name: 'x',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 20 + functionDiff + returnDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 21 + functionDiff + returnDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 13 + functionDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 22 + functionDiff + returnDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 11 + functionDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 24 + functionDiff + returnDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 1
+                        },
+                        end: {
+                            line: 1,
+                            column: 24 + functionDiff + returnDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 25 + functionDiff + returnDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 25 + functionDiff + returnDiff
+            }
+        }
+    })
+
+    test(`(${_function}(){ ${_return} x * y })`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'ExpressionStatement',
+                expression: {
+                    expression: false,
+                    type: 'FunctionExpression',
+                    id: null,
+                    params: [],
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'ReturnStatement',
+                                argument: {
+                                    type: 'BinaryExpression',
+                                    left: {
+                                        type: 'Identifier',
+                                        name: 'x',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 20 + functionDiff + returnDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 21 + functionDiff + returnDiff
+                                            }
+                                        }
+                                    },
+                                    operator: '*',
+                                    right: {
+                                        type: 'Identifier',
+                                        name: 'y',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 24 + functionDiff + returnDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 25 + functionDiff + returnDiff
+                                            }
+                                        }
+                                    },
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 20 + functionDiff + returnDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 25 + functionDiff + returnDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 13 + functionDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 25 + functionDiff + returnDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 11 + functionDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 27 + functionDiff + returnDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 1
+                        },
+                        end: {
+                            line: 1,
+                            column: 27 + functionDiff + returnDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 28 + functionDiff + returnDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 28 + functionDiff + returnDiff
+            }
+        }
+    })
+
+    test(`${_with} (x) foo = bar`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'WithStatement',
+                object: {
+                    type: 'Identifier',
+                    name: 'x',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6 + withDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + withDiff
+                        }
+                    }
+                },
+                body: {
+                    type: 'ExpressionStatement',
+                    expression: {
+                        type: 'AssignmentExpression',
+                        operator: '=',
+                        left: {
+                            type: 'Identifier',
+                            name: 'foo',
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 9 + withDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 12 + withDiff
+                                }
+                            }
+                        },
+                        right: {
+                            type: 'Identifier',
+                            name: 'bar',
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 15 + withDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 18 + withDiff
+                                }
+                            }
+                        },
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 9 + withDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 18 + withDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 9 + withDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 18 + withDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 18 + withDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 18 + withDiff
+            }
+        }
+    })
+
+    test(`${_with} (x) foo = bar;`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'WithStatement',
+                object: {
+                    type: 'Identifier',
+                    name: 'x',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6 + withDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + withDiff
+                        }
+                    }
+                },
+                body: {
+                    type: 'ExpressionStatement',
+                    expression: {
+                        type: 'AssignmentExpression',
+                        operator: '=',
+                        left: {
+                            type: 'Identifier',
+                            name: 'foo',
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 9 + withDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 12 + withDiff
+                                }
+                            }
+                        },
+                        right: {
+                            type: 'Identifier',
+                            name: 'bar',
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 15 + withDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 18 + withDiff
+                                }
+                            }
+                        },
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 9 + withDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 18 + withDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 9 + withDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 19 + withDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 19 + withDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 19 + withDiff
+            }
+        }
+    })
+
+    // Test that innocuous string that evaluates to `use strict` is not promoted to
+    // Use Strict directive.
+    test(`'use\\x20strict'; ${_with} (x) foo = bar;`, {})
+
+    // Test that innocuous string that evaluates to `use strict` is not promoted to
+    // Use Strict directive.
+    test(`"use\\x20strict"; ${_with} (x) foo = bar;`, {})
+
+    test(`${_with} (x) { foo = bar }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'WithStatement',
+                object: {
+                    type: 'Identifier',
+                    name: 'x',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6 + withDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + withDiff
+                        }
+                    }
+                },
+                body: {
+                    type: 'BlockStatement',
+                    body: [
+                        {
+                            type: 'ExpressionStatement',
+                            expression: {
+                                type: 'AssignmentExpression',
+                                operator: '=',
+                                left: {
+                                    type: 'Identifier',
+                                    name: 'foo',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 11 + withDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 14 + withDiff
+                                        }
+                                    }
+                                },
+                                right: {
+                                    type: 'Identifier',
+                                    name: 'bar',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 17 + withDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 20 + withDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 11 + withDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 20 + withDiff
+                                    }
+                                }
+                            },
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 11 + withDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 20 + withDiff
+                                }
+                            }
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 9 + withDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 22 + withDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 22 + withDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 22 + withDiff
+            }
+        }
+    })
+
+    test(`${_switch} (x) {}`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'SwitchStatement',
+                discriminant: {
+                    type: 'Identifier',
+                    name: 'x',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 8 + switchDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 9 + switchDiff
+                        }
+                    }
+                },
+                cases: [],
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 13 + switchDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 13 + switchDiff
+            }
+        }
+    })
+
+    test(`${_switch} (answer) { ${_case} 42: hi(); ${_break}; }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'SwitchStatement',
+                discriminant: {
+                    type: 'Identifier',
+                    name: 'answer',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 8 + switchDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 14 + switchDiff
+                        }
+                    }
+                },
+                cases: [
+                    {
+                        type: 'SwitchCase',
+                        consequent: [
+                            {
+                                type: 'ExpressionStatement',
+                                expression: {
+                                    type: 'CallExpression',
+                                    callee: {
+                                        type: 'Identifier',
+                                        name: 'hi',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 27 + switchDiff + caseDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 29 + switchDiff + caseDiff
+                                            }
+                                        }
+                                    },
+                                    arguments: [],
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 27 + switchDiff + caseDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 31 + switchDiff + caseDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 27 + switchDiff + caseDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 32 + switchDiff + caseDiff
+                                    }
+                                }
+                            },
+                            {
+                                type: 'BreakStatement',
+                                label: null,
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 33 + switchDiff + caseDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 39 + switchDiff + caseDiff + breakDiff
+                                    }
+                                }
+                            }
+                        ],
+                        test: {
+                            type: 'Literal',
+                            raw: '42',
+                            value: 42,
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 23 + switchDiff + caseDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 25 + switchDiff + caseDiff
+                                }
+                            }
+                        },
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 18 + switchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 39 + switchDiff + caseDiff + breakDiff
+                            }
+                        }
+                    }
+                ],
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 41 + switchDiff + caseDiff + breakDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 41 + switchDiff + caseDiff + breakDiff
+            }
+        }
+    })
+
+    test(`${_switch} (answer) { ${_case} 42: hi(); ${_break}; ${_default}: ${_break} }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'SwitchStatement',
+                discriminant: {
+                    type: 'Identifier',
+                    name: 'answer',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 8 + switchDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 14 + switchDiff
+                        }
+                    }
+                },
+                cases: [
+                    {
+                        type: 'SwitchCase',
+                        consequent: [
+                            {
+                                type: 'ExpressionStatement',
+                                expression: {
+                                    type: 'CallExpression',
+                                    callee: {
+                                        type: 'Identifier',
+                                        name: 'hi',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 27 + switchDiff + caseDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 29 + switchDiff + caseDiff
+                                            }
+                                        }
+                                    },
+                                    arguments: [],
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 27 + switchDiff + caseDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 31 + switchDiff + caseDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 27 + switchDiff + caseDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 32 + switchDiff + caseDiff
+                                    }
+                                }
+                            },
+                            {
+                                type: 'BreakStatement',
+                                label: null,
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 33 + switchDiff + caseDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 39 + switchDiff + caseDiff + breakDiff
+                                    }
+                                }
+                            }
+                        ],
+                        test: {
+                            type: 'Literal',
+                            raw: '42',
+                            value: 42,
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 23 + switchDiff + caseDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 25 + switchDiff + caseDiff
+                                }
+                            }
+                        },
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 18 + switchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 39 + switchDiff + caseDiff + breakDiff
+                            }
+                        }
+                    },
+                    {
+                        type: 'SwitchCase',
+                        consequent: [
+                            {
+                                type: 'BreakStatement',
+                                label: null,
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 49 + switchDiff + caseDiff + breakDiff + defaultDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 54 + switchDiff + caseDiff + breakDiff + defaultDiff + breakDiff
+                                    }
+                                }
+                            }
+                        ],
+                        test: null,
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 40 + switchDiff + caseDiff + breakDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 54 + switchDiff + caseDiff + breakDiff + defaultDiff + breakDiff
+                            }
+                        }
+                    }
+                ],
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 56 + switchDiff + caseDiff + breakDiff + defaultDiff + breakDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 56 + switchDiff + caseDiff + breakDiff + defaultDiff + breakDiff
+            }
+        }
+    })
+
+    test(`start: ${_for} (;;) ${_break} start`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'LabeledStatement',
+                body: {
+                    type: 'ForStatement',
+                    init: null,
+                    test: null,
+                    update: null,
+                    body: {
+                        type: 'BreakStatement',
+                        label: {
+                            type: 'Identifier',
+                            name: 'start',
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 22 + forDiff + breakDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 27 + forDiff + breakDiff
+                                }
+                            }
+                        },
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 16 + forDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 27 + forDiff + breakDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 7
+                        },
+                        end: {
+                            line: 1,
+                            column: 27 + forDiff + breakDiff
+                        }
+                    }
+                },
+                label: {
+                    type: 'Identifier',
+                    name: 'start',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 0
+                        },
+                        end: {
+                            line: 1,
+                            column: 5
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 27 + forDiff + breakDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 27 + forDiff + breakDiff
+            }
+        }
+    })
+
+    test(`start: ${_while} (${_true}) ${_break} start`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'LabeledStatement',
+                body: {
+                    type: 'WhileStatement',
+                    test: {
+                        type: 'Literal',
+                        raw: _true,
+                        value: true,
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 14 + whileDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 18 + whileDiff + trueDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BreakStatement',
+                        label: {
+                            type: 'Identifier',
+                            name: 'start',
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 26 + whileDiff + trueDiff + breakDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 31 + whileDiff + trueDiff + breakDiff
+                                }
+                            }
+                        },
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 20 + whileDiff + trueDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 31 + whileDiff + trueDiff + breakDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 7
+                        },
+                        end: {
+                            line: 1,
+                            column: 31 + whileDiff + trueDiff + breakDiff
+                        }
+                    }
+                },
+                label: {
+                    type: 'Identifier',
+                    name: 'start',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 0
+                        },
+                        end: {
+                            line: 1,
+                            column: 5
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 31 + whileDiff + trueDiff + breakDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 31 + whileDiff + trueDiff + breakDiff
+            }
+        }
+    })
+
+    test(`${_throw} x;`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'ThrowStatement',
+                argument: {
+                    type: 'Identifier',
+                    name: 'x',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6 + throwDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + throwDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 8 + throwDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 8 + throwDiff
+            }
+        }
+    })
+
+    test(`${_throw} x * y`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'ThrowStatement',
+                argument: {
+                    type: 'BinaryExpression',
+                    left: {
+                        type: 'Identifier',
+                        name: 'x',
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 6 + throwDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 7 + throwDiff
+                            }
+                        }
+                    },
+                    operator: '*',
+                    right: {
+                        type: 'Identifier',
+                        name: 'y',
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 10 + throwDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 11 + throwDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6 + throwDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 11 + throwDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 11 + throwDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 11 + throwDiff
+            }
+        }
+    })
+
+    test(`${_throw} { message: 'Error' }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'ThrowStatement',
+                argument: {
+                    type: 'ObjectExpression',
+                    properties: [
+                        {
+                            type: 'Property',
+                            key: {
+                                type: 'Identifier',
+                                name: 'message',
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 8 + throwDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 15 + throwDiff
+                                    }
+                                }
+                            },
+                            value: {
+                                type: 'Literal',
+                                raw: '\'Error\'',
+                                value: 'Error',
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 17 + throwDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 24 + throwDiff
+                                    }
+                                }
+                            },
+                            kind: 'init'
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 6 + throwDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 26 + throwDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 26 + throwDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 26 + throwDiff
+            }
+        }
+    })
+
+    test(`${_try} { } ${_catch} (e) { }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'TryStatement',
+                block: {
+                    type: 'BlockStatement',
+                    body: [],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 4 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + tryDiff
+                        }
+                    }
+                },
+                handler: {
+                    type: 'CatchClause',
+                    param: {
+                        type: 'Identifier',
+                        name: 'e',
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 15 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 16 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 18 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 21 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 8 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 21 + tryDiff + catchDiff
+                        }
+                    }
+                }
+                ,
+                finalizer: null,
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 21 + tryDiff + catchDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 21 + tryDiff + catchDiff
+            }
+        }
+    })
+
+    test(`${_try} { } ${_catch} (${_eval}) { }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'TryStatement',
+                block: {
+                    type: 'BlockStatement',
+                    body: [],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 4 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + tryDiff
+                        }
+                    }
+                },
+                handler:
+                {
+                    type: 'CatchClause',
+                    param: {
+                        type: 'Identifier',
+                        name: _eval,
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 15 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 19 + tryDiff + catchDiff + evalDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 21 + tryDiff + catchDiff + evalDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 24 + tryDiff + catchDiff + evalDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 8 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 24 + tryDiff + catchDiff + evalDiff
+                        }
+                    }
+                }
+                ,
+                finalizer: null,
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 24 + tryDiff + catchDiff + evalDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 24 + tryDiff + catchDiff + evalDiff
+            }
+        }
+    })
+
+    test(`${_try} { } ${_catch} (${_arguments}) { }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'TryStatement',
+                block: {
+                    type: 'BlockStatement',
+                    body: [],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 4 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + tryDiff
+                        }
+                    }
+                },
+                handler:
+                {
+                    type: 'CatchClause',
+                    param: {
+                        type: 'Identifier',
+                        name: _arguments,
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 15 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 24 + tryDiff + catchDiff + argumentsDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 26 + tryDiff + catchDiff + argumentsDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 29 + tryDiff + catchDiff + argumentsDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 8 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 29 + tryDiff + catchDiff + argumentsDiff
+                        }
+                    }
+                }
+                ,
+                finalizer: null,
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 29 + tryDiff + catchDiff + argumentsDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 29 + tryDiff + catchDiff + argumentsDiff
+            }
+        }
+    })
+
+    test(`${_try} { } ${_catch} (e) { say(e) }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'TryStatement',
+                block: {
+                    type: 'BlockStatement',
+                    body: [],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 4 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + tryDiff
+                        }
+                    }
+                },
+                handler:
+                {
+                    type: 'CatchClause',
+                    param: {
+                        type: 'Identifier',
+                        name: 'e',
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 15 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 16 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'ExpressionStatement',
+                                expression: {
+                                    type: 'CallExpression',
+                                    callee: {
+                                        type: 'Identifier',
+                                        name: 'say',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 20 + tryDiff + catchDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 23 + tryDiff + catchDiff
+                                            }
+                                        }
+                                    },
+                                    arguments: [
+                                        {
+                                            type: 'Identifier',
+                                            name: 'e',
+                                            loc: {
+                                                start: {
+                                                    line: 1,
+                                                    column: 24 + tryDiff + catchDiff
+                                                },
+                                                end: {
+                                                    line: 1,
+                                                    column: 25 + tryDiff + catchDiff
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 20 + tryDiff + catchDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 26 + tryDiff + catchDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 20 + tryDiff + catchDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 26 + tryDiff + catchDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 18 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 28 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 8 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 28 + tryDiff + catchDiff
+                        }
+                    }
+                }
+                ,
+                finalizer: null,
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 28 + tryDiff + catchDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 28 + tryDiff + catchDiff
+            }
+        }
+    })
+
+    test(`${_try} { } ${_finally} { cleanup(stuff) }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'TryStatement',
+                block: {
+                    type: 'BlockStatement',
+                    body: [],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 4 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 7 + tryDiff
+                        }
+                    }
+                },
+                handler: null,
+                finalizer: {
+                    type: 'BlockStatement',
+                    body: [
+                        {
+                            type: 'ExpressionStatement',
+                            expression: {
+                                type: 'CallExpression',
+                                callee: {
+                                    type: 'Identifier',
+                                    name: 'cleanup',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 18 + tryDiff + finallyDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 25 + tryDiff + finallyDiff
+                                        }
+                                    }
+                                },
+                                arguments: [
+                                    {
+                                        type: 'Identifier',
+                                        name: 'stuff',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 26 + tryDiff + finallyDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 31 + tryDiff + finallyDiff
+                                            }
+                                        }
+                                    }
+                                ],
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 18 + tryDiff + finallyDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 32 + tryDiff + finallyDiff
+                                    }
+                                }
+                            },
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 18 + tryDiff + finallyDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 32 + tryDiff + finallyDiff
+                                }
+                            }
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 16 + tryDiff + finallyDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 34 + tryDiff + finallyDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 34 + tryDiff + finallyDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 34 + tryDiff + finallyDiff
+            }
+        }
+    })
+
+    test(`${_try} { doThat(); } ${_catch} (e) { say(e) }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'TryStatement',
+                block: {
+                    type: 'BlockStatement',
+                    body: [
+                        {
+                            type: 'ExpressionStatement',
+                            expression: {
+                                type: 'CallExpression',
+                                callee: {
+                                    type: 'Identifier',
+                                    name: 'doThat',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 6 + tryDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 12 + tryDiff
+                                        }
+                                    }
+                                },
+                                arguments: [],
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 6 + tryDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 14 + tryDiff
+                                    }
+                                }
+                            },
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 6 + tryDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 15 + tryDiff
+                                }
+                            }
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 4 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 17 + tryDiff
+                        }
+                    }
+                },
+                handler:
+                {
+                    type: 'CatchClause',
+                    param: {
+                        type: 'Identifier',
+                        name: 'e',
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 25 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 26 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'ExpressionStatement',
+                                expression: {
+                                    type: 'CallExpression',
+                                    callee: {
+                                        type: 'Identifier',
+                                        name: 'say',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 30 + tryDiff + catchDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 33 + tryDiff + catchDiff
+                                            }
+                                        }
+                                    },
+                                    arguments: [
+                                        {
+                                            type: 'Identifier',
+                                            name: 'e',
+                                            loc: {
+                                                start: {
+                                                    line: 1,
+                                                    column: 34 + tryDiff + catchDiff
+                                                },
+                                                end: {
+                                                    line: 1,
+                                                    column: 35 + tryDiff + catchDiff
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 30 + tryDiff + catchDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 36 + tryDiff + catchDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 30 + tryDiff + catchDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 36 + tryDiff + catchDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 28 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 38 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 18 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 38 + tryDiff + catchDiff
+                        }
+                    }
+                }
+                ,
+                finalizer: null,
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 38 + tryDiff + catchDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 38 + tryDiff + catchDiff
+            }
+        }
+    })
+
+    test(`${_try} { doThat(); } ${_catch} (e) { say(e) } ${_finally} { cleanup(stuff) }`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'TryStatement',
+                block: {
+                    type: 'BlockStatement',
+                    body: [
+                        {
+                            type: 'ExpressionStatement',
+                            expression: {
+                                type: 'CallExpression',
+                                callee: {
+                                    type: 'Identifier',
+                                    name: 'doThat',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 6 + tryDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 12 + tryDiff
+                                        }
+                                    }
+                                },
+                                arguments: [],
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 6 + tryDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 14 + tryDiff
+                                    }
+                                }
+                            },
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 6 + tryDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 15 + tryDiff
+                                }
+                            }
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 4 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 17 + tryDiff
+                        }
+                    }
+                },
+                handler:
+                {
+                    type: 'CatchClause',
+                    param: {
+                        type: 'Identifier',
+                        name: 'e',
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 25 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 26 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    body: {
+                        type: 'BlockStatement',
+                        body: [
+                            {
+                                type: 'ExpressionStatement',
+                                expression: {
+                                    type: 'CallExpression',
+                                    callee: {
+                                        type: 'Identifier',
+                                        name: 'say',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 30 + tryDiff + catchDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 33 + tryDiff + catchDiff
+                                            }
+                                        }
+                                    },
+                                    arguments: [
+                                        {
+                                            type: 'Identifier',
+                                            name: 'e',
+                                            loc: {
+                                                start: {
+                                                    line: 1,
+                                                    column: 34 + tryDiff + catchDiff
+                                                },
+                                                end: {
+                                                    line: 1,
+                                                    column: 35 + tryDiff + catchDiff
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 30 + tryDiff + catchDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 36 + tryDiff + catchDiff
+                                        }
+                                    }
+                                },
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 30 + tryDiff + catchDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 36 + tryDiff + catchDiff
+                                    }
+                                }
+                            }
+                        ],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 28 + tryDiff + catchDiff
+                            },
+                            end: {
+                                line: 1,
+                                column: 38 + tryDiff + catchDiff
+                            }
+                        }
+                    },
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 18 + tryDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 38 + tryDiff + catchDiff
+                        }
+                    }
+                }
+                ,
+                finalizer: {
+                    type: 'BlockStatement',
+                    body: [
+                        {
+                            type: 'ExpressionStatement',
+                            expression: {
+                                type: 'CallExpression',
+                                callee: {
+                                    type: 'Identifier',
+                                    name: 'cleanup',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 49 + tryDiff + catchDiff + finallyDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 56 + tryDiff + catchDiff + finallyDiff
+                                        }
+                                    }
+                                },
+                                arguments: [
+                                    {
+                                        type: 'Identifier',
+                                        name: 'stuff',
+                                        loc: {
+                                            start: {
+                                                line: 1,
+                                                column: 57 + tryDiff + catchDiff + finallyDiff
+                                            },
+                                            end: {
+                                                line: 1,
+                                                column: 62 + tryDiff + catchDiff + finallyDiff
+                                            }
+                                        }
+                                    }
+                                ],
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 49 + tryDiff + catchDiff + finallyDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 63 + tryDiff + catchDiff + finallyDiff
+                                    }
+                                }
+                            },
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 49 + tryDiff + catchDiff + finallyDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 63 + tryDiff + catchDiff + finallyDiff
+                                }
+                            }
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 47 + tryDiff + catchDiff + finallyDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 65 + tryDiff + catchDiff + finallyDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 65 + tryDiff + catchDiff + finallyDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 65 + tryDiff + catchDiff + finallyDiff
+            }
+        }
+    })
+
+    test(`${_debugger};`, {
+        type: 'Program',
+        body: [
+            {
+                type: 'DebuggerStatement',
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 9 + debuggerDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 9 + debuggerDiff
+            }
+        }
+    })
+
+    test(`${_function} hello() { sayHi(); }`, {
+        type: 'Program',
+        body: [
+            {
+                expression: false,
+                type: 'FunctionDeclaration',
+                id: {
+                    type: 'Identifier',
+                    name: 'hello',
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 9 + functionDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 14 + functionDiff
+                        }
+                    }
+                },
+                params: [],
+                body: {
+                    type: 'BlockStatement',
+                    body: [
+                        {
+                            type: 'ExpressionStatement',
+                            expression: {
+                                type: 'CallExpression',
+                                callee: {
+                                    type: 'Identifier',
+                                    name: 'sayHi',
+                                    loc: {
+                                        start: {
+                                            line: 1,
+                                            column: 19 + functionDiff
+                                        },
+                                        end: {
+                                            line: 1,
+                                            column: 24 + functionDiff
+                                        }
+                                    }
+                                },
+                                arguments: [],
+                                loc: {
+                                    start: {
+                                        line: 1,
+                                        column: 19 + functionDiff
+                                    },
+                                    end: {
+                                        line: 1,
+                                        column: 26 + functionDiff
+                                    }
+                                }
+                            },
+                            loc: {
+                                start: {
+                                    line: 1,
+                                    column: 19 + functionDiff
+                                },
+                                end: {
+                                    line: 1,
+                                    column: 27 + functionDiff
+                                }
+                            }
+                        }
+                    ],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 17 + functionDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 29 + functionDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 29 + functionDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 29 + functionDiff
+            }
+        }
+    })
+
+    test(`${_function} ${_eval}() { }`, {
+        type: 'Program',
+        body: [
+            {
+                expression: false,
+                type: 'FunctionDeclaration',
+                id: {
+                    type: 'Identifier',
+                    name: _eval,
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 9 + functionDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 13 + functionDiff + evalDiff
+                        }
+                    }
+                },
+                params: [],
+                body: {
+                    type: 'BlockStatement',
+                    body: [],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 16 + functionDiff + evalDiff
+                        },
+                        end: {
+                            line: 1,
+                            column: 19 + functionDiff + evalDiff
+                        }
+                    }
+                },
+                loc: {
+                    start: {
+                        line: 1,
+                        column: 0
+                    },
+                    end: {
+                        line: 1,
+                        column: 19 + functionDiff + evalDiff
+                    }
+                }
+            }
+        ],
+        loc: {
+            start: {
+                line: 1,
+                column: 0
+            },
+            end: {
+                line: 1,
+                column: 19 + functionDiff + evalDiff
             }
         }
     })
