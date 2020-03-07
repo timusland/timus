@@ -170,7 +170,9 @@ function getTestWords(lang) {
         _void: getLanguageSynonym('void', lang),
 
         _while: getLanguageSynonym('while', lang),
-        _with: getLanguageSynonym('with', lang)
+        _with: getLanguageSynonym('with', lang),
+
+        _yield: getLanguageSynonym('yield', lang)
     }
 }
 

@@ -44,6 +44,7 @@ module.exports = [
         'var': 'v',
         'void': 'vazio',
         'while': 'enquanto',
-        'with': 'com'
+        'with': 'com',
+        'yield': 'entregar'
     }
 ]
