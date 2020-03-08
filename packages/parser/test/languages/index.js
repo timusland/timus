@@ -7,6 +7,7 @@ module.exports = [
         'break': 'quebrar',
         'case': 'nocaso',
         'catch': 'capturar',
+        'class': 'classe',
         'continue': 'continuar',
         'debugger': 'depurador',
         'default': 'padrão',

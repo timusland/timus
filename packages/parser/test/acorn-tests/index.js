@@ -7,6 +7,7 @@ function run(lang) {
     const testsOptionalCatchBinding = require('./tests-optional-catch-binding')
     const testsRegexp2018 = require('./tests-regexp-2018')
     const testsRegexp = require('./tests-regexp')
+    const testsDirective = require('./tests-directive')
 
     tests.run(lang)
     testsAwaitTopLevel.run(lang)
@@ -16,6 +17,7 @@ function run(lang) {
     testsOptionalCatchBinding.run(lang)
     testsRegexp2018.run(lang)
     testsRegexp.run(lang)
+    testsDirective.run(lang)
 }
 
 module.exports = { run }

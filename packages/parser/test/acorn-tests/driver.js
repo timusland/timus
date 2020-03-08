@@ -120,6 +120,7 @@ function getTestWords(lang) {
 
         _case: getLanguageSynonym('case', lang),
         _catch: getLanguageSynonym('catch', lang),
+        _class: getLanguageSynonym('class', lang),
         _continue: getLanguageSynonym('continue', lang),
 
         _debugger: getLanguageSynonym('debugger', lang),
