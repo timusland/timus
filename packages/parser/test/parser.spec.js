@@ -62,6 +62,15 @@ describe('getLanguageSynonyms', () => {
         assert.deepStrictEqual(result, ['if'])
     })
 
+    it('should consider only own properties', () => {
+        const lang = {}
+        // lang['constructor'] exists but it doesn't define
+        // a synonym for 'constructor'.
+        // This is why it should consider only own properties.
+        const result = getLanguageSynonyms('constructor', lang)
+        assert.deepStrictEqual(result, ['constructor'])
+    })
+
     it('should handle lang argument undefined', () => {
         // This is very similar to the case that there are no synonyms for the JS word
         // in the lang argument.
@@ -114,6 +123,15 @@ describe('getLanguageSynonym', () => {
         // `lang` argument undefined
         result = getLanguageSynonym('if')
         assert.equal(result, 'if')
+    })
+
+    it('should consider only own properties', () => {
+        const lang = {}
+        // lang['constructor'] exists but it doesn't define
+        // a synonym for 'constructor'.
+        // This is why it should consider only own properties.
+        const result = getLanguageSynonym('constructor', lang)
+        assert.equal(result, 'constructor')
     })
 })
 

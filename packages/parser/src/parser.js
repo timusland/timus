@@ -41,14 +41,14 @@ export function getLanguageWordsRegExp(jsWordsRegExp, lang) {
 }
 
 export function getLanguageSynonyms(jsWord, lang) {
-    if (!lang || !lang[jsWord])
+    if (!lang || !lang.hasOwnProperty(jsWord))
         return [jsWord]
     const aux = lang[jsWord].split('|')
     return aux.map(langWord => langWord.trim())
 }
 
 export function getLanguageSynonym(jsWord, lang, alt = 0) {
-    if (!lang || !lang[jsWord])
+    if (!lang || !lang.hasOwnProperty(jsWord))
         return jsWord
     const aux = lang[jsWord].split('|')
     return aux.map(langWord => langWord.trim())[alt] || jsWord
