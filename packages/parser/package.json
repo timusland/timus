@@ -23,9 +23,7 @@
     "devDependencies": {
         "acorn": "^7.1.1",
         "mocha": "^7.1.0",
-        "rollup": "^1.32.0",
-        "rollup-plugin-commonjs": "^10.1.0",
-        "rollup-plugin-node-resolve": "^5.2.0"
+        "rollup": "^1.32.0"
     },
     "peerDependencies": {
         "acorn": "^7.1.1"

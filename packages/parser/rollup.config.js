@@ -1,6 +1,3 @@
-import commonjs from 'rollup-plugin-commonjs'
-import nodeResolve from 'rollup-plugin-node-resolve'
-
 export default {
     input: 'src/parser.js',
     output: [
@@ -13,14 +10,5 @@ export default {
             file: 'dist/timus-parser.mjs',
             format: 'es'
         }
-    ],
-    plugins: [
-        nodeResolve({
-            browser: true
-        }),
-        commonjs({
-            include: ['node_modules/**'],
-            sourceMap: false
-        })
     ]
 }
