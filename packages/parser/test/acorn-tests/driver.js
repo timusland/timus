@@ -1,11 +1,8 @@
 const assert = require('assert')
-const {
-    TimusParser,
-    getLanguageSynonym,
-    AcornNode,
-    AcornSourceLocation,
-    AcornPosition
-} = require('../../dist/timus-parser')
+const { timusParser, getLanguageSynonym } = require('../../dist/timus-parser')
+const { Parser, Node: AcornNode, SourceLocation: AcornSourceLocation, Position: AcornPosition } = require('acorn')
+
+const TimusParser = Parser.extend(timusParser)
 
 function walkObject(object, callback) {
     for (const key in object) {
