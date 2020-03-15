@@ -1,8 +1,33 @@
 {
-    "private": true,
+    "name": "@timus/cli",
     "version": "0.1.0",
-    "workspaces": [
-        "packages/*"
+    "main": "dist/timus.js",
+    "module": "dist/timus.mjs",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/timusland/timus.git"
+    },
+    "keywords": [
+        "timus"
     ],
-    "scripts": {}
+    "author": "Conrado Carvalho",
+    "bugs": {
+        "url": "https://github.com/timusland/timus/issues"
+    },
+    "scripts": {
+        "test": "mocha --reporter=progress",
+        "build": "tsc & rollup -c"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^11.0.2",
+        "@rollup/plugin-node-resolve": "^7.1.1",
+        "mocha": "^7.1.0",
+        "rollup": "^1.32.0",
+        "rollup-plugin-terser": "^5.3.0"
+    },
+    "dependencies": {
+        "acorn": "^7.1.1",
+        "acorn-walk": "^7.1.1"
+    }
 }

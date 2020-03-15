@@ -8,6 +8,7 @@ module.exports = [
         'case': 'nocaso',
         'catch': 'capturar',
         'class': 'classe',
+        'const': 'cnst',
         'continue': 'continuar',
         'debugger': 'depurador',
         'default': 'padrão',

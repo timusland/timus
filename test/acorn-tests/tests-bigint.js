@@ -1,5 +1,6 @@
 function run(lang) {
-    const { getTestRunner, getTestFailRunner, getTestWords } = require('./driver')
+    const { getTestRunner, getTestFailRunner } = require('./driver')
+    const { getTestWords } = require('../utilities')
 
     const test = getTestRunner(lang)
     const testFail = getTestFailRunner(lang)

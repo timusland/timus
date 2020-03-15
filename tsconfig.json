@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/ts-out",
+        "target": "ESNext",
+        "module": "ESNext",
+        "allowJs": true,
+        "moduleResolution": "node"
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}

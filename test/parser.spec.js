@@ -5,7 +5,7 @@ const {
     getLanguageSynonym,
     getJavaScriptSynonym,
     areSynonyms
-} = require('../dist/timus-parser')
+} = require('../dist/timus')
 
 describe('getLanguageWordsRegExp', () => {
     // Acorn uses internally a few regular expressions
